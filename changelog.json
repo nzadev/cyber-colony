@@ -1,5 +1,16 @@
 [
   {
+    "id": 1788458493,
+    "version": "v1.6.0",
+    "title": "Mega Update v1.6.0: 10 Peningkatan Utama (Kustomisasi Pesawat, Minimap Event/Boss Tracking, Aim Spread Dinamis, 5 Biome & Musik Dinamis, Menu Simpel, Tombol Feedback & Optimalisasi 60 FPS)",
+    "category": "MEGA UPDATE",
+    "timestamp": 1788458493634,
+    "date_str": "04 Sep 2026, 01:01 WIB",
+    "changes": [
+      "Mega Update v1.6.0: 10 Peningkatan Utama (Kustomisasi Pesawat, Minimap Event/Boss Tracking, Aim Spread Dinamis, 5 Biome & Musik Dinamis, Menu Simpel, Tombol Feedback & Optimalisasi 60 FPS)"
+    ]
+  },
+  {
     "id": 1788456946,
     "version": "v1.5.2",
     "title": "Auto sync commit 04-09-2026 00:35",
