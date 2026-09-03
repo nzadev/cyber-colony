@@ -427,6 +427,46 @@
             backdrop-filter: blur(8px);
         }
 
+        .log-mode-tab {
+            background: rgba(10, 22, 40, 0.7);
+            border: 1px solid rgba(0, 240, 255, 0.25);
+            color: var(--text-muted);
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .log-mode-tab:hover {
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        .log-mode-tab.active {
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.25), rgba(255, 0, 119, 0.15));
+            border-color: var(--primary);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+        }
+
+        .removed-card {
+            background: rgba(28, 12, 22, 0.85);
+            border: 1px solid rgba(255, 0, 119, 0.3);
+            border-left: 4px solid #ff0077;
+            border-radius: 12px;
+            padding: 18px 22px;
+            transition: all 0.25s ease;
+        }
+
+        .removed-card:hover {
+            border-color: #ff0077;
+            box-shadow: 0 4px 20px rgba(255, 0, 119, 0.25);
+            transform: translateY(-2px);
+        }
+
         .timeline-container {
             display: flex;
             flex-direction: column;
@@ -579,7 +619,6 @@
                 <div class="download-meta">
                     <span>📱 Android 8.0+</span>
                     <span>📦 28 MB (Super Ringan 60 FPS)</span>
-                    <span>🕹️ Analog Touchscreen Super Responsif</span>
                 </div>
             </div>
         </header>
@@ -651,8 +690,14 @@
                 </div>
             </div>
 
-            <!-- FILTER BUTTONS -->
-            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">
+            <!-- LOG MODE TABS -->
+            <div style="display:flex; gap:10px; margin-bottom:18px; border-bottom:1px solid rgba(0,240,255,0.2); padding-bottom:12px; flex-wrap:wrap;">
+                <button class="log-mode-tab active" id="btn-mode-active" onclick="switchLogMode('active')">⚡ Log Update Aktif (<span id="active-tab-badge">0</span>)</button>
+                <button class="log-mode-tab" id="btn-mode-removed" onclick="switchLogMode('removed')">🗑️ Riwayat Fitur yang Dihapus / Di-remove (<span id="removed-tab-badge">0</span>)</button>
+            </div>
+
+            <!-- FILTER BUTTONS (ACTIVE MODE ONLY) -->
+            <div id="active-filter-container" style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">
                 <button class="log-filter-btn active" onclick="setLogFilter('ALL')">✨ Semua Update</button>
                 <button class="log-filter-btn" onclick="setLogFilter('FEATURE')">⚡ Fitur Baru</button>
                 <button class="log-filter-btn" onclick="setLogFilter('FIX')">🛠️ Perbaikan & Bug</button>
@@ -1053,6 +1098,23 @@
             return valid;
         }
 
+        let currentLogMode = 'active';
+        let rawChangelog = [];
+        let rawRemovedLogs = [];
+        let activeLogFilter = 'ALL';
+
+        function switchLogMode(mode) {
+            currentLogMode = mode;
+            document.getElementById('btn-mode-active').classList.toggle('active', mode === 'active');
+            document.getElementById('btn-mode-removed').classList.toggle('active', mode === 'removed');
+            
+            const filterContainer = document.getElementById('active-filter-container');
+            if (filterContainer) {
+                filterContainer.style.display = (mode === 'active') ? 'flex' : 'none';
+            }
+            renderChangelog();
+        }
+
         async function fetchChangelog() {
             try {
                 let res = await fetch('changelog.json?t=' + Date.now());
@@ -1062,10 +1124,27 @@
                 if (res.ok) {
                     const data = await res.json();
                     rawChangelog = pruneChangelogData(data);
-                    renderChangelog();
+                    const activeBadge = document.getElementById('active-tab-badge');
+                    if (activeBadge) activeBadge.innerText = rawChangelog.length;
+                    if (currentLogMode === 'active') renderChangelog();
                 }
             } catch (err) {
                 console.warn("Changelog fetch fallback:", err);
+            }
+        }
+
+        async function fetchRemovedLogs() {
+            try {
+                let res = await fetch('removed_features.json?t=' + Date.now());
+                if (res.ok) {
+                    const data = await res.json();
+                    rawRemovedLogs = pruneChangelogData(data);
+                    const remBadge = document.getElementById('removed-tab-badge');
+                    if (remBadge) remBadge.innerText = rawRemovedLogs.length;
+                    if (currentLogMode === 'removed') renderChangelog();
+                }
+            } catch (err) {
+                console.warn("Removed logs fetch fallback:", err);
             }
         }
 
@@ -1082,6 +1161,55 @@
             const badge = document.getElementById('changelog-count-badge');
             if (!list) return;
 
+            const now = Date.now();
+
+            if (currentLogMode === 'removed') {
+                if (badge) badge.innerText = `${rawRemovedLogs.length} Fitur Di-remove`;
+
+                if (rawRemovedLogs.length === 0) {
+                    list.innerHTML = `
+                        <div style="text-align:center; padding: 28px 16px; background: rgba(5,12,24,0.6); border: 1px dashed rgba(255,0,119,0.3); border-radius: 12px;">
+                            <span style="font-size: 28px; display:block; margin-bottom:6px;">🗑️</span>
+                            <b style="color: #ff0077; font-size: 15px;">Tidak Ada Fitur yang Dihapus / Di-remove</b>
+                            <p style="color: var(--text-muted); font-size: 13px; margin-top: 4px;">Semua fitur berjalan aktif di versi Protocol Zero saat ini.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                list.innerHTML = '';
+                rawRemovedLogs.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'removed-card';
+
+                    let daysLeftText = '';
+                    if (item.timestamp) {
+                        const ageDays = (now - item.timestamp) / (24 * 60 * 60 * 1000);
+                        const remainingDays = Math.max(1, Math.ceil(RETENTION_DAYS - ageDays));
+                        daysLeftText = `⏳ Arsip s/d ${remainingDays} hari lagi`;
+                    }
+
+                    card.innerHTML = `
+                        <div class="changelog-top">
+                            <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                                <span class="version-pill" style="border-color:#ff0077; color:#ff0077; background:rgba(255,0,119,0.15); box-shadow:0 0 10px rgba(255,0,119,0.25);">${item.version || 'v1.7.0'}</span>
+                                <span class="cat-pill" style="background:rgba(255, 0, 119, 0.25); border:1px solid #ff0077; color:#ff0077;">🗑️ DIHAPUS DARI GAME</span>
+                                <span style="font-size:12px; color:var(--text-muted); font-weight:600;">🕒 ${item.date_str || ''}</span>
+                            </div>
+                            ${daysLeftText ? `<span class="expiry-pill">${daysLeftText}</span>` : ''}
+                        </div>
+                        <div class="changelog-title" style="color:#ff6b9d;">${item.feature_name || 'Fitur'}</div>
+                        <div style="background:rgba(0,0,0,0.35); border-radius:8px; padding:12px; margin-top:8px; border:1px solid rgba(255,0,119,0.2);">
+                            <p style="font-size:14px; color:#ffccd9; margin-bottom:6px;"><b>⚠️ Alasan Dihapus:</b> ${item.reason || '-'}</p>
+                            <p style="font-size:14px; color:#00ff88;"><b>💡 Solusi / Pengganti:</b> ${item.replacement || '-'}</p>
+                        </div>
+                    `;
+                    list.appendChild(card);
+                });
+                return;
+            }
+
+            // --- ACTIVE LOGS MODE ---
             let filtered = rawChangelog.filter(item => {
                 if (activeLogFilter === 'ALL') return true;
                 return (item.category || '').toUpperCase().includes(activeLogFilter);
@@ -1101,8 +1229,6 @@
             }
 
             list.innerHTML = '';
-            const now = Date.now();
-
             filtered.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'changelog-card';
@@ -1122,7 +1248,7 @@
                 let catCol = 'var(--primary)';
                 if (cat.includes('FIX')) {
                     catBg = 'rgba(0, 255, 136, 0.15)'; catBorder = '#00ff88'; catCol = '#00ff88';
-                } else if (cat.includes('MAJOR')) {
+                } else if (cat.includes('MAJOR') || cat.includes('ULTRA')) {
                     catBg = 'rgba(255, 0, 119, 0.2)'; catBorder = '#ff0077'; catCol = '#ff0077';
                 } else if (cat.includes('BALANCE')) {
                     catBg = 'rgba(255, 208, 0, 0.15)'; catBorder = '#ffd000'; catCol = '#ffd000';
@@ -1153,9 +1279,11 @@
 
         // Initial fetch + auto-sync every 6 seconds
         fetchChangelog();
+        fetchRemovedLogs();
         fetchReviews();
         fetchAnnouncement();
         setInterval(fetchChangelog, 10000);
+        setInterval(fetchRemovedLogs, 10000);
         setInterval(fetchReviews, 6000);
         setInterval(fetchAnnouncement, 10000);
 
