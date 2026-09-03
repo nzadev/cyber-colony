@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1788455496,
+    "version": "v1.5.2",
+    "title": "Perbaikan notifikasi Boss Overlord & jaminan spawn gerombolan swarm",
+    "category": "FIX & BALANCE",
+    "timestamp": 1788455496356,
+    "date_str": "04 Sep 2026, 00:11 WIB",
+    "changes": [
+      "Perbaikan notifikasi Boss Overlord & jaminan spawn gerombolan swarm"
+    ]
+  },
+  {
+    "id": 1,
+    "version": "v1.5.2",
+    "title": "👑 Boss Alert Siren & Guaranteed Swarm Invasion",
+    "category": "FIX & BALANCE",
+    "badge_color": "#00ff88",
+    "timestamp": 1788480300000,
+    "date_str": "04 Sep 2026, 00:05 WIB",
+    "changes": [
+      "Peringatan khusus kedatangan Boss 'BOSS DETECTED: OVERLORD MAINFRAME' lengkap dengan getaran layar (Screen Shake 12.0).",
+      "Pemisahan peringatan gerombolan musuh 'HOSTILE SWARM INVASION' agar tidak tertukar dengan Boss.",
+      "Jaminan spawn 8-12 musuh penyerbu secara instan saat peringatan berbunyi (tidak terblokir batas musuh).",
+      "Pacing Boss pertama dimajukan ke detik 90 (1:30) dengan jarak spawn ideal (480px)."
+    ]
+  },
+  {
+    "id": 2,
+    "version": "v1.5.0",
+    "title": "⚡ Multiplayer Co-Op & Orbit Blade Arsenal",
+    "category": "MAJOR FEATURE",
+    "badge_color": "#00f0ff",
+    "timestamp": 1788473400000,
+    "date_str": "03 Sep 2026, 22:10 WIB",
+    "changes": [
+      "Sistem Multiplayer Co-Op lokal terintegrasi untuk mabar bertarung bersama.",
+      "Senjata baru 'Orbit Blade' dengan rotasi pedang energi berkecepatan tinggi.",
+      "Sistem Sound Manager dan audio alert dinamis."
+    ]
+  },
+  {
+    "id": 3,
+    "version": "v1.4.0",
+    "title": "🌌 Quantum Dimensional Realms & Terminals",
+    "category": "FEATURE",
+    "badge_color": "#a855f7",
+    "timestamp": 1788400000000,
+    "date_str": "02 Sep 2026, 18:30 WIB",
+    "changes": [
+      "Portal lompatan dimensi kuantum (Pyromancer Magma & Void Phantoms).",
+      "Terminal hackable di medan perang (Ally Turret, Shield Pylon, EMP Overcharger).",
+      "Sistem save game permanen dan database perk roguelite."
+    ]
+  }
+]

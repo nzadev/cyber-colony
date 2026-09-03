@@ -1,13 +1,19 @@
 #!/bin/bash
 # 🚀 Cyber Colony Tycoon - Auto Sync & Deploy Script
-echo "=========================================="
+echo "=================================================="
 echo "🔄 Menyiapkan sinkronisasi update ke Cloud..."
-echo "=========================================="
+echo "=================================================="
 
 cd "$(dirname "$0")"
 
+MSG="${1:-Update sistem & optimasi gameplay $(date '+%d-%m-%Y %H:%M')}"
+VER="${2:-v1.5.2}"
+CAT="${3:-UPDATE}"
+
+# Auto update changelog catalog & prune old entries (>14 days or >50 entries)
+python3 update_changelog.py "$MSG" "$VER" "$CAT"
+
 git add .
-MSG="${1:-Update website & game $(date '+%d-%m-%Y %H:%M')}"
 git commit -m "$MSG"
 
 # Push to default branch
@@ -16,5 +22,5 @@ git push origin "$BRANCH"
 
 echo ""
 echo "✅ Push selesai ke branch '$BRANCH'!"
-echo "🚀 Server Cloud akan otomatis mendeteksi update & me-refresh web dalam 10-20 detik!"
-echo "=========================================="
+echo "🚀 Web GitHub Pages akan otomatis ter-update dalam 15-30 detik!"
+echo "=================================================="
