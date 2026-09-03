@@ -673,6 +673,8 @@
                     <p>4 Drone pendamping setia: Valkyrie (Loot Siphon), Cerberus (Assault Stun), Aegis (Shield), Nanite Doc (Heal).</p>
                 </div>
             </div>
+        </section>
+
         <!-- PROTOCOL UPDATE CATALOG & PATCH NOTES -->
         <section class="changelog-section" id="changelog-section">
             <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px; margin-bottom: 20px;">
@@ -1072,7 +1074,9 @@
         // ==========================================
         const RETENTION_DAYS = 14;
         const MAX_LOG_ENTRIES = 50;
+        let currentLogMode = 'active';
         let rawChangelog = [];
+        let rawRemovedLogs = [];
         let activeLogFilter = 'ALL';
 
         function pruneChangelogData(entries) {
@@ -1097,11 +1101,6 @@
 
             return valid;
         }
-
-        let currentLogMode = 'active';
-        let rawChangelog = [];
-        let rawRemovedLogs = [];
-        let activeLogFilter = 'ALL';
 
         function switchLogMode(mode) {
             currentLogMode = mode;
