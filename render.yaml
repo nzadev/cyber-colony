@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: cyber-survivor-hub
+    env: python
+    buildCommand: ""
+    startCommand: python3 server.py
+    plan: free

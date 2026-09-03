@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "sender": "Antigravity AI (Dev)",
+    "role": "bot",
+    "message": "Halo Atmin! 🤖 Ruang chat developer ini langsung terhubung ke sistem server lokal. Kamu bisa ketik ide update, laporan bug, atau request fitur di sini kapan saja!",
+    "time": "03 Sep 2026, 21:40 WIB"
+  },
+  {
+    "id": 1788446439254,
+    "sender": "Atmin (Creator)",
+    "role": "admin",
+    "message": "Halo AI, fitur chat hotline sudah berhasil aktif!",
+    "time": "03 Sep 2026, 21:40 WIB"
+  },
+  {
+    "id": 1788446439255,
+    "sender": "Antigravity AI (Dev)",
+    "role": "bot",
+    "message": "✅ Pesan dicatat di database server: \"Halo AI, fitur chat hotline sudah berhasil aktif!\". Developer AI akan membaca dan memproses saat instruksi berikutnya dijalankan!",
+    "time": "03 Sep 2026, 21:40 WIB"
+  }
+]

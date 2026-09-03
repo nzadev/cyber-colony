@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocol Zero - Developer Admin Console & AI Hotline</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #030712;
+            --card-bg: rgba(11, 19, 36, 0.9);
+            --primary: #00f0ff;
+            --secondary: #ff0077;
+            --accent: #ffd000;
+            --emerald: #00ff88;
+            --purple: #a855f7;
+            --danger: #ef4444;
+            --text-main: #f0f6fc;
+            --text-muted: #8b9bb4;
+            --border: rgba(0, 240, 255, 0.25);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 24px 16px 80px;
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        /* HEADER */
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .admin-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .admin-badge {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-nav {
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-nav:hover {
+            background: var(--primary);
+            color: #000;
+        }
+
+        /* TABS */
+        .tab-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 12px;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-muted);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .tab-btn.active {
+            background: rgba(0, 240, 255, 0.2);
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: 0 0 12px rgba(0, 240, 255, 0.35);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* PIN BAR */
+        .pin-bar {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .pin-input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pin-input {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--border);
+            color: var(--primary);
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-family: 'Orbitron', monospace;
+            font-size: 16px;
+            width: 120px;
+            text-align: center;
+            letter-spacing: 3px;
+        }
+
+        /* STATS GRID */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .stat-val {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .stat-lbl {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* SEARCH & ACTIONS BAR */
+        .controls-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--border);
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 15px;
+            flex: 1;
+            min-width: 240px;
+        }
+
+        .filter-select {
+            background: rgba(11, 19, 36, 0.9);
+            border: 1px solid var(--border);
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .btn-danger:hover {
+            background: var(--danger);
+            color: #fff;
+        }
+
+        /* MODERATION CARDS */
+        .feedback-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .mod-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 5px solid var(--primary);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.2s;
+        }
+
+        .mod-card.pinned {
+            border-left-color: var(--accent);
+            background: rgba(20, 28, 48, 0.95);
+            box-shadow: 0 0 15px rgba(255, 208, 0, 0.2);
+        }
+
+        .mod-card.critique {
+            border-left-color: #ff5500;
+        }
+
+        .mod-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .mod-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .reviewer-name {
+            font-weight: 700;
+            font-size: 17px;
+            color: #ffffff;
+        }
+
+        .badge-cat {
+            background: rgba(0, 240, 255, 0.15);
+            color: var(--primary);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .badge-cat.critique {
+            background: rgba(255, 85, 0, 0.2);
+            color: #ff5500;
+        }
+
+        .stars {
+            color: var(--accent);
+            font-size: 15px;
+            letter-spacing: 2px;
+        }
+
+        .comment-body {
+            font-size: 15px;
+            line-height: 1.5;
+            color: #e2e8f0;
+            margin-bottom: 14px;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 12px 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* DEVELOPER REPLY BOX */
+        .dev-reply-container {
+            margin-top: 10px;
+            margin-bottom: 14px;
+            background: rgba(255, 208, 0, 0.08);
+            border: 1px solid rgba(255, 208, 0, 0.4);
+            border-radius: 8px;
+            padding: 10px 14px;
+        }
+
+        .dev-reply-header {
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--accent);
+            margin-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .dev-reply-text {
+            font-size: 14px;
+            color: #fff;
+            line-height: 1.4;
+        }
+
+        .mod-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .mod-info-time {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .mod-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-act {
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .btn-act.reply {
+            background: rgba(255, 208, 0, 0.15);
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .btn-act.reply:hover {
+            background: var(--accent);
+            color: #000;
+        }
+
+        .btn-act.pin {
+            background: rgba(0, 240, 255, 0.15);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .btn-act.pin:hover {
+            background: var(--primary);
+            color: #000;
+        }
+
+        .btn-act.del {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+            border-color: var(--danger);
+        }
+
+        .btn-act.del:hover {
+            background: var(--danger);
+            color: #fff;
+        }
+
+        /* MODAL POPUP FOR REPLY */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(6px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .modal-dialog {
+            background: #0d1527;
+            border: 2px solid var(--accent);
+            border-radius: 14px;
+            width: 100%;
+            max-width: 520px;
+            padding: 24px;
+            box-shadow: 0 0 30px rgba(255, 208, 0, 0.35);
+        }
+
+        .modal-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .modal-preview {
+            background: rgba(0, 0, 0, 0.5);
+            border-left: 3px solid var(--primary);
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .modal-textarea {
+            width: 100%;
+            height: 110px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: #fff;
+            padding: 12px;
+            font-size: 15px;
+            resize: vertical;
+            margin-bottom: 14px;
+        }
+
+        .modal-textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(255, 208, 0, 0.3);
+        }
+
+        .modal-btn-row {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .btn-modal-cancel {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .btn-modal-submit {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 15px;
+            cursor: pointer;
+            box-shadow: 0 0 12px rgba(255, 208, 0, 0.4);
+        }
+
+        /* CHAT HUB / AI HOTLINE */
+        .chat-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+        }
+
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 12px;
+            margin-bottom: 14px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-right: 6px;
+            margin-bottom: 14px;
+        }
+
+        .chat-msg {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+
+        .chat-msg.admin {
+            align-self: flex-end;
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.25), rgba(0, 150, 255, 0.35));
+            border: 1px solid var(--primary);
+            color: #fff;
+            border-bottom-right-radius: 2px;
+        }
+
+        .chat-msg.bot {
+            align-self: flex-start;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #e2e8f0;
+            border-bottom-left-radius: 2px;
+        }
+
+        .chat-meta {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .chat-input-bar {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--border);
+            color: #fff;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .btn-send {
+            background: linear-gradient(135deg, var(--primary), #0099ff);
+            color: #000;
+            font-weight: 800;
+            border: none;
+            padding: 0 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+
+        .btn-send:hover {
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+            transform: translateY(-1px);
+        }
+
+        /* ANNOUNCEMENT CARD */
+        .ann-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header class="admin-header">
+            <div>
+                <h1 class="admin-title">
+                    ⚡ PROTOCOL ZERO <span class="admin-badge">ADMIN CONSOLE</span>
+                </h1>
+                <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Pusat Komando Moderasi Kritik, Balas Feedback, & Developer AI Hotline</p>
+            </div>
+            <div class="nav-links">
+                <a href="/" class="btn-nav" target="_blank">🌐 Lihat Web Publik</a>
+                <button onclick="exportJSON()" class="btn-nav">💾 Backup JSON</button>
+            </div>
+        </header>
+
+        <!-- TABS -->
+        <div class="tab-bar">
+            <button class="tab-btn active" onclick="switchTab('reviews-tab', this)">🛡️ Moderasi & Balas Kritik</button>
+            <button class="tab-btn" onclick="switchTab('chat-tab', this)">💬 Chat Hotline ke AI Dev</button>
+            <button class="tab-btn" onclick="switchTab('ann-tab', this)">📢 Pengumuman Web</button>
+        </div>
+
+        <!-- PIN BAR -->
+        <div class="pin-bar">
+            <div style="font-size: 14px; color: var(--text-muted);">
+                🔑 PIN Keamanan Admin: <strong style="color: #fff;">8888</strong> (Otomatis Terisi)
+            </div>
+            <div class="pin-input-group">
+                <input type="password" id="admin-pin" class="pin-input" placeholder="8888" value="8888">
+                <button onclick="savePin()" class="btn-nav" style="padding: 6px 12px; font-size: 13px;">Simpan PIN</button>
+            </div>
+        </div>
+
+        <!-- TAB 1: MODERASI KRITIK & BALAS -->
+        <div id="reviews-tab" class="tab-content active">
+            <!-- STATS -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-val" id="stat-total">0</div>
+                    <div class="stat-lbl">Total Tanggapan</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-val" id="stat-critique" style="color: #ff5500;">0</div>
+                    <div class="stat-lbl">💣 Total Kritik</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-val" id="stat-ideas" style="color: var(--accent);">0</div>
+                    <div class="stat-lbl">💡 Total Saran</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-val" id="stat-rating" style="color: var(--emerald);">5.0 ★</div>
+                    <div class="stat-lbl">Rata-Rata Rating</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-val" id="stat-likes" style="color: var(--secondary);">0</div>
+                    <div class="stat-lbl">❤️ Total Suka</div>
+                </div>
+            </div>
+
+            <!-- CONTROLS -->
+            <div class="controls-bar">
+                <input type="text" id="search-box" class="search-input" placeholder="🔍 Cari nama pengirim atau kata kunci..." oninput="filterReviews()">
+                
+                <select id="cat-filter" class="filter-select" onchange="filterReviews()">
+                    <option value="ALL">Semua Kategori</option>
+                    <option value="💣">💣 Kritik Pedas & Evaluasi</option>
+                    <option value="💡">💡 Saran Fitur Baru</option>
+                    <option value="🔥">🔥 Review & Pujian</option>
+                    <option value="⚖️">⚖️ Balancing Musuh / Senjata</option>
+                    <option value="🐛">🐛 Laporan Bug</option>
+                </select>
+
+                <button onclick="clearAllFeedbacks()" class="btn-danger">🧹 Bersihkan Semua Data</button>
+            </div>
+
+            <!-- FEEDBACK LIST -->
+            <div class="feedback-list" id="mod-list">
+                <!-- Rendered dynamically -->
+            </div>
+        </div>
+
+        <!-- TAB 2: CHAT AI HOTLINE -->
+        <div id="chat-tab" class="tab-content">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <div>
+                        <strong style="color: var(--primary); font-size: 16px;">🤖 Antigravity AI Direct Hotline</strong>
+                        <p style="font-size: 13px; color: var(--text-muted);">Pesanmu langsung tersimpan di database server lokal `developer_inbox.json`</p>
+                    </div>
+                    <span style="background: rgba(0, 255, 136, 0.2); color: var(--emerald); padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 700;">🟢 LIVE CONNECTED</span>
+                </div>
+                <div class="chat-messages" id="chat-box">
+                    <!-- Chat rendered dynamically -->
+                </div>
+                <div class="chat-input-bar">
+                    <input type="text" id="chat-input" class="chat-input" placeholder="Ketik ide update, pesan, atau request fitur di sini..." onkeypress="handleChatEnter(event)">
+                    <button onclick="sendChatMessage()" class="btn-send">KIRIM 🚀</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: ANNOUNCEMENT BROADCAST -->
+        <div id="ann-tab" class="tab-content">
+            <div class="ann-card">
+                <h3 style="color: var(--accent); margin-bottom: 12px; font-family: 'Orbitron', sans-serif;">📢 Siaran Pengumuman Global Website</h3>
+                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 16px;">Pengumuman ini akan muncul sebagai banner berjalan di bagian paling atas halaman web publik untuk semua pengunjung!</p>
+                
+                <div style="margin-bottom: 16px;">
+                    <label style="display: block; font-weight: 700; margin-bottom: 6px;">Teks Pengumuman:</label>
+                    <textarea id="ann-text" style="width: 100%; height: 90px; background: rgba(0,0,0,0.6); border: 1px solid var(--border); border-radius: 8px; color: #fff; padding: 12px; font-size: 15px; resize: vertical;"></textarea>
+                </div>
+
+                <div style="display: flex; gap: 12px; align-items: center;">
+                    <button onclick="saveAnnouncement(true)" class="btn-nav" style="background: var(--primary); color: #000;">🚀 Pasang / Aktifkan Pengumuman</button>
+                    <button onclick="saveAnnouncement(false)" class="btn-danger">Matikan Pengumuman</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- REPLY MODAL POPUP -->
+    <div class="modal-overlay" id="reply-modal-overlay">
+        <div class="modal-dialog">
+            <h2 class="modal-title">💬 Balas Kritik & Masukan Pemain</h2>
+            <div class="modal-preview" id="modal-comment-preview">
+                <strong id="modal-reply-target" style="color: #fff; display:block; margin-bottom: 4px;">Nama Pemain</strong>
+                <span id="modal-reply-text-snippet">"Isi komentar pemain..."</span>
+            </div>
+
+            <label style="display: block; font-weight: 700; margin-bottom: 6px; font-size: 14px; color: var(--accent);">Tulis Balasan Resmi Developer:</label>
+            <textarea id="modal-reply-text" class="modal-textarea" placeholder="Contoh: Terima kasih sarannya bro! Sudah kami perbaiki di update versi terbaru ya..."></textarea>
+
+            <div class="modal-btn-row">
+                <button type="button" class="btn-modal-cancel" onclick="closeReplyModal()">Batal</button>
+                <button type="button" class="btn-modal-submit" onclick="submitModalReply()">👑 Kirim Balasan Resmi</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let reviewsData = [];
+        let currentPin = localStorage.getItem('protocol_zero_admin_pin') || "8888";
+        let activeReplyId = null;
+
+        document.getElementById('admin-pin').value = currentPin;
+
+        function getActivePin() {
+            const inputVal = document.getElementById('admin-pin') ? document.getElementById('admin-pin').value.trim() : '';
+            return inputVal || currentPin || localStorage.getItem('protocol_zero_admin_pin') || "8888";
+        }
+
+        function savePin() {
+            currentPin = getActivePin();
+            localStorage.setItem('protocol_zero_admin_pin', currentPin);
+            alert('PIN Admin berhasil disimpan: ' + currentPin);
+        }
+
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+            if (tabId === 'chat-tab') fetchChatHistory();
+            if (tabId === 'ann-tab') fetchAnnouncement();
+        }
+
+        async function fetchAdminReviews() {
+            // Do NOT re-render if user is currently typing in reply modal or input box
+            const isModalOpen = document.getElementById('reply-modal-overlay').style.display === 'flex';
+            const isInputFocused = document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA');
+            if (isModalOpen || isInputFocused) return;
+
+            try {
+                const res = await fetch('/api/reviews');
+                if (res.ok) {
+                    const newData = await res.json();
+                    if (JSON.stringify(newData) !== JSON.stringify(reviewsData)) {
+                        reviewsData = newData;
+                        updateStats();
+                        filterReviews();
+                    }
+                }
+            } catch (err) {
+                console.error("Error loading reviews:", err);
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('stat-total').innerText = reviewsData.length;
+            const critiques = reviewsData.filter(r => r.category.includes('💣')).length;
+            const ideas = reviewsData.filter(r => r.category.includes('💡')).length;
+            const totalLikes = reviewsData.reduce((acc, r) => acc + (r.likes || 0), 0);
+            
+            let avgRating = 5.0;
+            if (reviewsData.length > 0) {
+                const sumRating = reviewsData.reduce((acc, r) => acc + (r.rating || 5), 0);
+                avgRating = (sumRating / reviewsData.length).toFixed(1);
+            }
+
+            document.getElementById('stat-critique').innerText = critiques;
+            document.getElementById('stat-ideas').innerText = ideas;
+            document.getElementById('stat-rating').innerText = avgRating + ' ★';
+            document.getElementById('stat-likes').innerText = totalLikes;
+        }
+
+        function filterReviews() {
+            const query = document.getElementById('search-box').value.toLowerCase().trim();
+            const cat = document.getElementById('cat-filter').value;
+            const list = document.getElementById('mod-list');
+            list.innerHTML = '';
+
+            const filtered = reviewsData.filter(r => {
+                const matchCat = cat === 'ALL' || r.category.includes(cat);
+                const matchQuery = !query || r.name.toLowerCase().includes(query) || r.comment.toLowerCase().includes(query);
+                return matchCat && matchQuery;
+            });
+
+            if (filtered.length === 0) {
+                list.innerHTML = `
+                    <div style="text-align:center; padding: 40px; background: var(--card-bg); border-radius: 12px; border: 1px dashed var(--border);">
+                        <p style="color: var(--text-muted); font-size: 16px;">Tidak ada tanggapan yang cocok dengan filter saat ini.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(r => {
+                const card = document.createElement('div');
+                const isCritique = r.category.includes('💣');
+                const isPinned = r.is_pinned === true;
+                card.className = `mod-card ${isPinned ? 'pinned' : ''} ${isCritique ? 'critique' : ''}`;
+                
+                const starStr = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+
+                let replyHtml = '';
+                if (r.admin_reply) {
+                    replyHtml = `
+                        <div class="dev-reply-container">
+                            <div class="dev-reply-header">
+                                <span>👑 Balasan Developer:</span>
+                                <span style="font-size: 11px; color: var(--text-muted);">${r.admin_reply.time}</span>
+                            </div>
+                            <div class="dev-reply-text">${r.admin_reply.text}</div>
+                        </div>
+                    `;
+                }
+
+                // Safely escape strings for onclick
+                const escapedName = (r.name || '').replace(/'/g, "\\'");
+                const escapedComment = (r.comment || '').replace(/'/g, "\\'");
+
+                card.innerHTML = `
+                    <div class="mod-header">
+                        <div class="mod-meta">
+                            <span class="reviewer-name">${r.name}</span>
+                            <span class="badge-cat ${isCritique ? 'critique' : ''}">${r.category}</span>
+                            <span style="font-size: 12px; color: var(--emerald);">• ${r.favClass}</span>
+                            ${isPinned ? '<span style="color: var(--accent); font-weight:700; font-size:12px;">📌 PINNED</span>' : ''}
+                        </div>
+                        <div class="stars">${starStr}</div>
+                    </div>
+                    <div class="comment-body">"${r.comment}"</div>
+                    ${replyHtml}
+
+                    <div class="mod-footer">
+                        <span class="mod-info-time">🕒 ${r.time} • ❤️ ${r.likes || 0} Suka</span>
+                        <div class="mod-actions">
+                            <button class="btn-act reply" onclick="openReplyModal('${r.id}', '${escapedName}', '${escapedComment}')">💬 Balas</button>
+                            <button class="btn-act pin" onclick="togglePin('${r.id}')">${isPinned ? '📌 Unpin' : '📌 Pin ke Atas'}</button>
+                            <button class="btn-act del" onclick="deleteFeedback('${r.id}')">🗑️ Hapus</button>
+                        </div>
+                    </div>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        // --- REPLY MODAL POPUP LOGIC ---
+        function openReplyModal(id, name, comment) {
+            activeReplyId = String(id);
+            document.getElementById('modal-reply-target').innerText = `Balas Masukan Dari: ${name}`;
+            document.getElementById('modal-reply-text-snippet').innerText = `"${comment}"`;
+            document.getElementById('modal-reply-text').value = '';
+            document.getElementById('reply-modal-overlay').style.display = 'flex';
+            setTimeout(() => {
+                document.getElementById('modal-reply-text').focus();
+            }, 100);
+        }
+
+        function closeReplyModal() {
+            document.getElementById('reply-modal-overlay').style.display = 'none';
+            activeReplyId = null;
+        }
+
+        async function submitModalReply() {
+            if (!activeReplyId) return;
+            const replyText = document.getElementById('modal-reply-text').value.trim();
+            if (!replyText) {
+                alert('Silakan ketik teks balasan terlebih dahulu!');
+                return;
+            }
+
+            const pinToUse = getActivePin();
+            try {
+                const res = await fetch('/api/admin/reply', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ pin: pinToUse, id: activeReplyId, reply: replyText })
+                });
+                const result = await res.json();
+                if (result.success) {
+                    reviewsData = result.reviews;
+                    closeReplyModal();
+                    updateStats();
+                    filterReviews();
+                    alert('✅ Balasan resmi developer berhasil diposting ke web publik! 👑');
+                } else {
+                    alert('⚠️ Gagal: ' + (result.error || 'PIN Salah'));
+                }
+            } catch (err) {
+                alert('Gagal mengirim balasan.');
+            }
+        }
+
+        async function deleteFeedback(id) {
+            const pinToUse = getActivePin();
+            if (!confirm('Apakah kamu yakin ingin MENGHAPUS komentar/kritik ini secara permanen dari server?')) return;
+            try {
+                const res = await fetch('/api/admin/delete', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ pin: pinToUse, id: String(id) })
+                });
+                const result = await res.json();
+                if (result.success) {
+                    reviewsData = result.reviews;
+                    updateStats();
+                    filterReviews();
+                    alert('✅ Komentar berhasil dihapus permanen dari server! 🗑️');
+                } else {
+                    alert('⚠️ Gagal: ' + (result.error || 'PIN Salah (Gunakan PIN: 8888)'));
+                }
+            } catch (err) {
+                alert('⚠️ Gagal menghubungi server backend.');
+            }
+        }
+
+        async function togglePin(id) {
+            const pinToUse = getActivePin();
+            try {
+                const res = await fetch('/api/admin/pin', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ pin: pinToUse, id: String(id) })
+                });
+                const result = await res.json();
+                if (result.success) {
+                    reviewsData = result.reviews;
+                    filterReviews();
+                } else {
+                    alert('⚠️ ' + (result.error || 'Gagal toggle pin'));
+                }
+            } catch (err) {
+                alert('Gagal toggle pin.');
+            }
+        }
+
+        async function clearAllFeedbacks() {
+            const pinToUse = getActivePin();
+            const code = prompt('Ketik "HAPUS" untuk konfirmasi menghapus SEMUA kritik dan ulasan di server:');
+            if (code !== 'HAPUS') return;
+
+            try {
+                const res = await fetch('/api/admin/clear', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ pin: pinToUse })
+                });
+                const result = await res.json();
+                if (result.success) {
+                    reviewsData = [];
+                    updateStats();
+                    filterReviews();
+                    alert('✅ Semua data tanggapan telah berhasil dibersihkan! 🧹');
+                } else {
+                    alert('⚠️ Gagal: ' + (result.error || 'PIN Salah'));
+                }
+            } catch (err) {
+                alert('Gagal membersihkan database.');
+            }
+        }
+
+        // --- CHAT HOTLINE LOGIC ---
+        async function fetchChatHistory() {
+            try {
+                const res = await fetch('/api/admin/chat');
+                if (res.ok) {
+                    const chats = await res.json();
+                    renderChat(chats);
+                }
+            } catch (e) {
+                console.error("Chat fetch error:", e);
+            }
+        }
+
+        function renderChat(chats) {
+            const box = document.getElementById('chat-box');
+            box.innerHTML = '';
+            chats.forEach(c => {
+                const div = document.createElement('div');
+                div.className = `chat-msg ${c.role === 'admin' ? 'admin' : 'bot'}`;
+                div.innerHTML = `
+                    <div class="chat-meta">
+                        <strong>${c.sender}</strong>
+                        <span>${c.time}</span>
+                    </div>
+                    <div>${c.message}</div>
+                `;
+                box.appendChild(div);
+            });
+            box.scrollTop = box.scrollHeight;
+        }
+
+        function handleChatEnter(e) {
+            if (e.key === 'Enter') sendChatMessage();
+        }
+
+        async function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const msg = input.value.trim();
+            if (!msg) return;
+
+            const pinToUse = getActivePin();
+            input.value = '';
+
+            try {
+                const res = await fetch('/api/admin/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ pin: pinToUse, message: msg })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    renderChat(data.chats);
+                } else {
+                    alert('Gagal mengirim pesan: ' + data.error);
+                }
+            } catch (err) {
+                alert('Gagal menghubungi server.');
+            }
+        }
+
+        // --- ANNOUNCEMENT LOGIC ---
+        async function fetchAnnouncement() {
+            try {
+                const res = await fetch('/api/announcement');
+                if (res.ok) {
+                    const data = await res.json();
+                    document.getElementById('ann-text').value = data.text || '';
+                }
+            } catch (e) {}
+        }
+
+        async function saveAnnouncement(isActive) {
+            const pinToUse = getActivePin();
+            const text = document.getElementById('ann-text').value.trim();
+            try {
+                const res = await fetch('/api/admin/announcement', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ pin: pinToUse, text: text, active: isActive })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    alert(isActive ? '✅ Pengumuman global berhasil dipasang di web!' : '✅ Pengumuman dimatikan!');
+                }
+            } catch (e) {
+                alert('Gagal update pengumuman.');
+            }
+        }
+
+        function exportJSON() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(reviewsData, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", "protocol_zero_feedbacks_backup.json");
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+
+        // Auto load and live sync every 4 seconds (smart diff)
+        fetchAdminReviews();
+        setInterval(fetchAdminReviews, 4000);
+    </script>
+</body>
+</html>
