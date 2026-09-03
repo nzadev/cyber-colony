@@ -5,8 +5,15 @@
 
 set -e
 
-PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
-ANDROID_DIR="$PROJECT_DIR/builds/android"
+# Auto-detect directories regardless of where user executes it
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+if [ -f "$SCRIPT_DIR/project.godot" ]; then
+    PROJECT_DIR="$SCRIPT_DIR"
+    ANDROID_DIR="$SCRIPT_DIR/builds/android"
+else
+    PROJECT_DIR="/home/nza/game buatan/cyber_colony_tycoon"
+    ANDROID_DIR="/home/nza/game buatan/cyber_colony_tycoon/builds/android"
+fi
 
 echo "=================================================="
 echo "⚡ [1-CLICK DEPLOY] Protocol Zero Instant Push"
