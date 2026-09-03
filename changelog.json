@@ -1,5 +1,16 @@
 [
   {
+    "id": 1788455535,
+    "version": "v1.5.2",
+    "title": "Perbaikan notifikasi Boss Overlord & balancing",
+    "category": "FIX",
+    "timestamp": 1788455535933,
+    "date_str": "04 Sep 2026, 00:12 WIB",
+    "changes": [
+      "Perbaikan notifikasi Boss Overlord & balancing"
+    ]
+  },
+  {
     "id": 1788455496,
     "version": "v1.5.2",
     "title": "Perbaikan notifikasi Boss Overlord & jaminan spawn gerombolan swarm",
