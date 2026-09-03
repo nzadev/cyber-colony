@@ -1075,26 +1075,81 @@
         const RETENTION_DAYS = 14;
         const MAX_LOG_ENTRIES = 50;
         let currentLogMode = 'active';
-        let rawChangelog = [];
-        let rawRemovedLogs = [];
         let activeLogFilter = 'ALL';
+
+        let rawChangelog = [
+            {
+                "id": 1788459800,
+                "version": "v1.7.0",
+                "title": "🔥 ULTRA UPDATE v1.7.0: 15 FITUR INOVASI TOTAL",
+                "category": "ULTRA UPDATE",
+                "timestamp": Date.now(),
+                "date_str": "04 Sep 2026, 01:25 WIB",
+                "changes": [
+                    "🤖 Cyber Mind Control / Hijack: Membajak robot kroco musuh berbalik arah menyerang kawanan lawan lalu meledak",
+                    "⚡ Laser Tether Wire: Tali laser pembelah musuh bertegangan tinggi yang menghubungkan pemain ke drone pendamping",
+                    "⏳ Time-Stop Stasis Bubble: Bola gravitasi stasis yang menghentikan waktu & peluru musuh selama 4 detik",
+                    "🧩 Modular Weapon Attachments: Musuh elite menjatuhkan modul senjata (Prism Ricochet, Nanite Acid, Hollow Point)",
+                    "👥 Holo-Decoy Shadow: Kloning hologram yang menembak & menarik seluruh perhatian musuh",
+                    "🔺 Tesla Node Triangulation: 3 paku listrik di arena yang membentuk segitiga laser kematian 1000 DPS",
+                    "🩸 Last Revenge Protocol: Wujud Hantu Merah 3 detik saat HP habis untuk menabrak Boss dengan ledakan nuklir 3000 Damage",
+                    "🎯 Holo-Scan Core Weakspot: Satelit memindai titik inti lemah Boss berkedip merah (5x True Damage!)",
+                    "🪐 Anti-Gravity Pulse: Gelombang zero-gravity yang membuat musuh melayang di udara tanpa gravitasi",
+                    "🎰 Lucky Cyber Casino Gacha Box: Mesin slot hologram di arena berhadiah senjata mythic atau buff kecepatan",
+                    "🎧 Audio-Reactive Beat Pulse: Lampu arena neon, thruster, dan grid arena berdenyut mengikuti ketukan musik synthwave",
+                    "📦 Orbital Supply Drop: Sinyal pemanggil kapsul baja dari luar angkasa yang menimpa musuh dan memberi heal penuh",
+                    "🛡️ One-Way Plasma Barricade: Tembok energi (peluru musuh membal, peluru kamu tembus +25% damage)",
+                    "🦠 Adrenaline Bio-Morph: Mutasi tubuh hero saat terkena damage (+Armor, +Speed, Berserk saat kritis)",
+                    "🕹️ Dynamic Touchscreen Analog: Analog layar sentuh dinamis mengambang (Floating Joystick) yang super mulus & responsif di segala posisi jari"
+                ]
+            },
+            {
+                "id": 1788458493,
+                "version": "v1.6.0",
+                "title": "🚀 MEGA UPDATE v1.6.0: 10 PENINGKATAN BESAR",
+                "category": "MEGA UPDATE",
+                "timestamp": Date.now() - 86400000,
+                "date_str": "04 Sep 2026, 01:05 WIB",
+                "changes": [
+                    "🎨 Kustomisasi Pesawat: 7 Warna Bodi (Hull Skin) & 5 Warna Api Jet Mesin (Thruster Flame)",
+                    "🗺️ Radar Minimap Lengkap: Melacak Boss (Tengkorak Merah + Panah Arah), Portal, Terminal, dan Peti Supply",
+                    "🔲 Perbaikan Background Grid: Tepi yang sering loncat/berpindah sudah diganti dengan infinite seamless canvas",
+                    "🎯 Dynamic Aim Spread & Recoil: Tembakan senjata lebih realistis, bertenaga, dan bergaya arcade",
+                    "🌌 5 Variasi Biome Awal: Setiap run baru dimulai di salah satu dari 5 Sektor Unik secara prosedural",
+                    "🎵 Musik Berbeda Tiap Sektor: Musik synthwave berganti melodi & tempo otomatis sesuai biome",
+                    "⚡ Optimalisasi 60 FPS Anti-Lag: Query radar di-throttle & damage text floating dibatasi agar bebas lag",
+                    "💬 Tombol Feedback Developer: Kirim saran dan masukan langsung dari dalam game ke web"
+                ]
+            }
+        ];
+
+        let rawRemovedLogs = [
+            {
+                "id": 1788461000,
+                "version": "v1.7.0",
+                "feature_name": "🎮 Gamepad & Bluetooth Controller Support",
+                "category": "REMOVED FEATURE",
+                "timestamp": Date.now(),
+                "date_str": "04 Sep 2026, 01:38 WIB",
+                "reason": "Dihapus karena menyebabkan konflik ghost input & memblokir kenyamanan analog layar sentuh di HP Android.",
+                "replacement": "🕹️ Dynamic Floating Touchscreen Analog (Murni 360° Touch Control super empuk & responsif)."
+            }
+        ];
 
         function pruneChangelogData(entries) {
             if (!Array.isArray(entries)) return [];
             const now = Date.now();
-            const maxAgeMs = RETENTION_DAYS * 24 * 60 * 60 * 1000; // 14 days in ms
+            const maxAgeMs = RETENTION_DAYS * 24 * 60 * 60 * 1000;
 
-            // 1. Filter out items older than 14 days
             let valid = entries.filter(item => {
                 if (!item.timestamp) return true;
-                const age = now - item.timestamp;
-                return age <= maxAgeMs;
+                const diff = now - item.timestamp;
+                if (diff < 0) return true;
+                return diff <= maxAgeMs;
             });
 
-            // 2. Sort descending (newest first)
             valid.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
 
-            // 3. Limit to max 50 entries
             if (valid.length > MAX_LOG_ENTRIES) {
                 valid = valid.slice(0, MAX_LOG_ENTRIES);
             }
@@ -1104,8 +1159,10 @@
 
         function switchLogMode(mode) {
             currentLogMode = mode;
-            document.getElementById('btn-mode-active').classList.toggle('active', mode === 'active');
-            document.getElementById('btn-mode-removed').classList.toggle('active', mode === 'removed');
+            const btnActive = document.getElementById('btn-mode-active');
+            const btnRemoved = document.getElementById('btn-mode-removed');
+            if (btnActive) btnActive.classList.toggle('active', mode === 'active');
+            if (btnRemoved) btnRemoved.classList.toggle('active', mode === 'removed');
             
             const filterContainer = document.getElementById('active-filter-container');
             if (filterContainer) {
@@ -1122,7 +1179,8 @@
                 }
                 if (res.ok) {
                     const data = await res.json();
-                    rawChangelog = pruneChangelogData(data);
+                    const pruned = pruneChangelogData(data);
+                    if (pruned.length > 0) rawChangelog = pruned;
                     const activeBadge = document.getElementById('active-tab-badge');
                     if (activeBadge) activeBadge.innerText = rawChangelog.length;
                     if (currentLogMode === 'active') renderChangelog();
@@ -1137,7 +1195,8 @@
                 let res = await fetch('removed_features.json?t=' + Date.now());
                 if (res.ok) {
                     const data = await res.json();
-                    rawRemovedLogs = pruneChangelogData(data);
+                    const pruned = pruneChangelogData(data);
+                    if (pruned.length > 0) rawRemovedLogs = pruned;
                     const remBadge = document.getElementById('removed-tab-badge');
                     if (remBadge) remBadge.innerText = rawRemovedLogs.length;
                     if (currentLogMode === 'removed') renderChangelog();
@@ -1275,6 +1334,13 @@
                 list.appendChild(card);
             });
         }
+
+        // Initial synchronous render
+        const initActiveBadge = document.getElementById('active-tab-badge');
+        if (initActiveBadge) initActiveBadge.innerText = rawChangelog.length;
+        const initRemBadge = document.getElementById('removed-tab-badge');
+        if (initRemBadge) initRemBadge.innerText = rawRemovedLogs.length;
+        renderChangelog();
 
         // Initial fetch + auto-sync every 6 seconds
         fetchChangelog();
