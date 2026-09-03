@@ -1,5 +1,16 @@
 [
   {
+    "id": 1788455556,
+    "version": "v1.5.2",
+    "title": "Auto sync commit 04-09-2026 00:12",
+    "category": "UPDATE",
+    "timestamp": 1788455556182,
+    "date_str": "04 Sep 2026, 00:12 WIB",
+    "changes": [
+      "Auto sync commit 04-09-2026 00:12"
+    ]
+  },
+  {
     "id": 1788455535,
     "version": "v1.5.2",
     "title": "Perbaikan notifikasi Boss Overlord & balancing",
