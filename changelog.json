@@ -1,5 +1,30 @@
 [
   {
+    "id": 1788459800,
+    "version": "v1.7.0",
+    "title": "🔥 ULTRA UPDATE v1.7.0: 15 FITUR INOVASI TOTAL",
+    "category": "ULTRA UPDATE",
+    "timestamp": 1788459800000,
+    "date_str": "04 Sep 2026, 01:25 WIB",
+    "changes": [
+      "🤖 Cyber Mind Control / Hijack: Membajak robot kroco musuh berbalik arah menyerang kawanan lawan lalu meledak",
+      "⚡ Laser Tether Wire: Tali laser pembelah musuh bertegangan tinggi yang menghubungkan pemain ke drone pendamping",
+      "⏳ Time-Stop Stasis Bubble: Bola gravitasi stasis yang menghentikan waktu & peluru musuh selama 4 detik",
+      "🧩 Modular Weapon Attachments: Musuh elite menjatuhkan modul senjata (Prism Ricochet, Nanite Acid, Hollow Point)",
+      "👥 Holo-Decoy Shadow: Kloning hologram yang menembak & menarik seluruh perhatian musuh",
+      "🔺 Tesla Node Triangulation: 3 paku listrik di arena yang membentuk segitiga laser kematian 1000 DPS",
+      "🩸 Last Revenge Protocol: Wujud Hantu Merah 3 detik saat HP habis untuk menabrak Boss dengan ledakan nuklir 3000 Damage",
+      "🎯 Holo-Scan Core Weakspot: Satelit memindai titik inti lemah Boss berkedip merah (5x True Damage!)",
+      "🪐 Anti-Gravity Pulse: Gelombang zero-gravity yang membuat musuh melayang di udara tanpa gravitasi",
+      "🎰 Lucky Cyber Casino Gacha Box: Mesin slot hologram di arena berhadiah senjata mythic atau buff kecepatan",
+      "🎧 Audio-Reactive Beat Pulse: Lampu arena neon, thruster, dan grid arena berdenyut mengikuti ketukan musik synthwave",
+      "📦 Orbital Supply Drop: Sinyal pemanggil kapsul baja dari luar angkasa yang menimpa musuh dan memberi heal penuh",
+      "🛡️ One-Way Plasma Barricade: Tembok energi (peluru musuh membal, peluru kamu tembus +25% damage)",
+      "🦠 Adrenaline Bio-Morph: Mutasi tubuh hero saat terkena damage (+Armor, +Speed, Berserk saat kritis)",
+      "🎮 Gamepad & Controller Support: Dukungan stik controller Bluetooth/USB (Move, Aim 360°, Dash, Ultimate)"
+    ]
+  },
+  {
     "id": 1788458493,
     "version": "v1.6.0",
     "title": "🚀 MEGA UPDATE v1.6.0: 10 PENINGKATAN BESAR",
@@ -14,9 +39,7 @@
       "🌌 5 Variasi Biome Awal: Setiap run baru dimulai di salah satu dari 5 Sektor Unik secara prosedural",
       "🎵 Musik Berbeda Tiap Sektor: Musik synthwave berganti melodi & tempo otomatis sesuai biome",
       "⚡ Optimalisasi 60 FPS Anti-Lag: Query radar di-throttle & damage text floating dibatasi agar bebas lag",
-      "💬 Tombol Feedback Developer: Kirim saran dan masukan langsung dari dalam game ke web",
-      "📱 UI Menu Utama Lebih Bersih & Simpel tanpa menghilangkan fitur",
-      "🌐 Panduan Mabar Online Jarak Jauh via IP Publik / Tunneling"
+      "💬 Tombol Feedback Developer: Kirim saran dan masukan langsung dari dalam game ke web"
     ]
   },
   {
@@ -28,35 +51,7 @@
     "date_str": "04 Sep 2026, 00:34 WIB",
     "changes": [
       "Tombol Pause touchable di pojok kanan atas HUD mobile",
-      "Menu Pause lengkap dengan Resume, Restart, Menu Utama, dan Quit Game",
-      "Kode Room Host IP besar dengan tombol 1-Click Copy IP ke clipboard",
-      "Tombol shortcut Paste & Hotspot Preset di menu Join"
-    ]
-  },
-  {
-    "id": 1788454200,
-    "version": "v1.5.1",
-    "title": "Boss Siren Alert, Swarm Invasion Guaranteed Spawn & APK Speed Boost",
-    "category": "IMPROVEMENT",
-    "timestamp": 1788454200000,
-    "date_str": "03 Sep 2026, 23:50 WIB",
-    "changes": [
-      "Pemisahan warning siren Boss dan Swarm Invasion",
-      "Jaminan spawn 8-12 musuh swarm tanpa terblokir cap",
-      "Optimalisasi runtime Godot 4.7.2"
-    ]
-  },
-  {
-    "id": 1788451200,
-    "version": "v1.5.0",
-    "title": "Multiplayer Co-Op 2-4 Pemain, LAN Lobby & Revive System",
-    "category": "MULTIPLAYER",
-    "timestamp": 1788451200000,
-    "date_str": "03 Sep 2026, 23:00 WIB",
-    "changes": [
-      "Mode Mabar Co-Op 2-4 Pemain via WiFi/Hotspot LAN",
-      "Sistem Downed & Revive rekan tim",
-      "Sinkronisasi posisi, proyektil, dan HP pemain tim"
+      "Menu Pause lengkap dengan Resume, Restart, Menu Utama, dan Quit Game"
     ]
   }
 ]
