@@ -6,11 +6,8 @@ echo "🚀 Protocol Zero - GitHub Push & Auto-Sync Helper"
 echo "=================================================="
 echo ""
 
-# Auto update changelog catalog & prune old entries (>14 days or >50 entries)
-python3 update_changelog.py "Auto sync commit $(date '+%d-%m-%Y %H:%M')" "v1.5.2" "UPDATE"
-
 git add .
-git commit -m "Auto sync update catalog & builds" 2>/dev/null || true
+git commit -m "Deploy v1.6.0 Mega Update to GitHub Pages" 2>/dev/null || true
 
 echo "Silakan masukkan Token GitHub Anda (yang diawali ghp_...)"
 read -p "👉 Paste Token di sini: " USER_TOKEN

@@ -1,46 +1,22 @@
 [
   {
-    "id": 1788458622,
-    "version": "v1.5.2",
-    "title": "Auto sync commit 04-09-2026 01:03",
-    "category": "UPDATE",
-    "timestamp": 1788458622187,
-    "date_str": "04 Sep 2026, 01:03 WIB",
-    "changes": [
-      "Auto sync commit 04-09-2026 01:03"
-    ]
-  },
-  {
-    "id": 1788458534,
-    "version": "v1.5.2",
-    "title": "Auto sync commit 04-09-2026 01:02",
-    "category": "UPDATE",
-    "timestamp": 1788458534419,
-    "date_str": "04 Sep 2026, 01:02 WIB",
-    "changes": [
-      "Auto sync commit 04-09-2026 01:02"
-    ]
-  },
-  {
     "id": 1788458493,
     "version": "v1.6.0",
-    "title": "Mega Update v1.6.0: 10 Peningkatan Utama (Kustomisasi Pesawat, Minimap Event/Boss Tracking, Aim Spread Dinamis, 5 Biome & Musik Dinamis, Menu Simpel, Tombol Feedback & Optimalisasi 60 FPS)",
+    "title": "🚀 MEGA UPDATE v1.6.0: 10 PENINGKATAN BESAR",
     "category": "MEGA UPDATE",
     "timestamp": 1788458493634,
-    "date_str": "04 Sep 2026, 01:01 WIB",
+    "date_str": "04 Sep 2026, 01:05 WIB",
     "changes": [
-      "Mega Update v1.6.0: 10 Peningkatan Utama (Kustomisasi Pesawat, Minimap Event/Boss Tracking, Aim Spread Dinamis, 5 Biome & Musik Dinamis, Menu Simpel, Tombol Feedback & Optimalisasi 60 FPS)"
-    ]
-  },
-  {
-    "id": 1788456946,
-    "version": "v1.5.2",
-    "title": "Auto sync commit 04-09-2026 00:35",
-    "category": "UPDATE",
-    "timestamp": 1788456946188,
-    "date_str": "04 Sep 2026, 00:35 WIB",
-    "changes": [
-      "Auto sync commit 04-09-2026 00:35"
+      "🎨 Kustomisasi Pesawat: 7 Warna Bodi (Hull Skin) & 5 Warna Api Jet Mesin (Thruster Flame)",
+      "🗺️ Radar Minimap Lengkap: Melacak Boss (Tengkorak Merah + Panah Arah), Portal, Terminal, dan Peti Supply",
+      "🔲 Perbaikan Background Grid: Tepi yang sering loncat/berpindah sudah diganti dengan infinite seamless canvas",
+      "🎯 Dynamic Aim Spread & Recoil: Tembakan senjata lebih realistis, bertenaga, dan bergaya arcade",
+      "🌌 5 Variasi Biome Awal: Setiap run baru dimulai di salah satu dari 5 Sektor Unik secara prosedural",
+      "🎵 Musik Berbeda Tiap Sektor: Musik synthwave berganti melodi & tempo otomatis sesuai biome",
+      "⚡ Optimalisasi 60 FPS Anti-Lag: Query radar di-throttle & damage text floating dibatasi agar bebas lag",
+      "💬 Tombol Feedback Developer: Kirim saran dan masukan langsung dari dalam game ke web",
+      "📱 UI Menu Utama Lebih Bersih & Simpel tanpa menghilangkan fitur",
+      "🌐 Panduan Mabar Online Jarak Jauh via IP Publik / Tunneling"
     ]
   },
   {
@@ -51,83 +27,36 @@
     "timestamp": 1788456882757,
     "date_str": "04 Sep 2026, 00:34 WIB",
     "changes": [
-      "Fitur Menu Pause Lengkap (Tombol Pause di HUD, Menu Utama, Quit Game) & Panduan Detail Host/Join Multiplayer"
+      "Tombol Pause touchable di pojok kanan atas HUD mobile",
+      "Menu Pause lengkap dengan Resume, Restart, Menu Utama, dan Quit Game",
+      "Kode Room Host IP besar dengan tombol 1-Click Copy IP ke clipboard",
+      "Tombol shortcut Paste & Hotspot Preset di menu Join"
     ]
   },
   {
-    "id": 1788455556,
-    "version": "v1.5.2",
-    "title": "Auto sync commit 04-09-2026 00:12",
-    "category": "UPDATE",
-    "timestamp": 1788455556182,
-    "date_str": "04 Sep 2026, 00:12 WIB",
+    "id": 1788454200,
+    "version": "v1.5.1",
+    "title": "Boss Siren Alert, Swarm Invasion Guaranteed Spawn & APK Speed Boost",
+    "category": "IMPROVEMENT",
+    "timestamp": 1788454200000,
+    "date_str": "03 Sep 2026, 23:50 WIB",
     "changes": [
-      "Auto sync commit 04-09-2026 00:12"
+      "Pemisahan warning siren Boss dan Swarm Invasion",
+      "Jaminan spawn 8-12 musuh swarm tanpa terblokir cap",
+      "Optimalisasi runtime Godot 4.7.2"
     ]
   },
   {
-    "id": 1788455535,
-    "version": "v1.5.2",
-    "title": "Perbaikan notifikasi Boss Overlord & balancing",
-    "category": "FIX",
-    "timestamp": 1788455535933,
-    "date_str": "04 Sep 2026, 00:12 WIB",
-    "changes": [
-      "Perbaikan notifikasi Boss Overlord & balancing"
-    ]
-  },
-  {
-    "id": 1788455496,
-    "version": "v1.5.2",
-    "title": "Perbaikan notifikasi Boss Overlord & jaminan spawn gerombolan swarm",
-    "category": "FIX & BALANCE",
-    "timestamp": 1788455496356,
-    "date_str": "04 Sep 2026, 00:11 WIB",
-    "changes": [
-      "Perbaikan notifikasi Boss Overlord & jaminan spawn gerombolan swarm"
-    ]
-  },
-  {
-    "id": 1,
-    "version": "v1.5.2",
-    "title": "👑 Boss Alert Siren & Guaranteed Swarm Invasion",
-    "category": "FIX & BALANCE",
-    "badge_color": "#00ff88",
-    "timestamp": 1788480300000,
-    "date_str": "04 Sep 2026, 00:05 WIB",
-    "changes": [
-      "Peringatan khusus kedatangan Boss 'BOSS DETECTED: OVERLORD MAINFRAME' lengkap dengan getaran layar (Screen Shake 12.0).",
-      "Pemisahan peringatan gerombolan musuh 'HOSTILE SWARM INVASION' agar tidak tertukar dengan Boss.",
-      "Jaminan spawn 8-12 musuh penyerbu secara instan saat peringatan berbunyi (tidak terblokir batas musuh).",
-      "Pacing Boss pertama dimajukan ke detik 90 (1:30) dengan jarak spawn ideal (480px)."
-    ]
-  },
-  {
-    "id": 2,
+    "id": 1788451200,
     "version": "v1.5.0",
-    "title": "⚡ Multiplayer Co-Op & Orbit Blade Arsenal",
-    "category": "MAJOR FEATURE",
-    "badge_color": "#00f0ff",
-    "timestamp": 1788473400000,
-    "date_str": "03 Sep 2026, 22:10 WIB",
+    "title": "Multiplayer Co-Op 2-4 Pemain, LAN Lobby & Revive System",
+    "category": "MULTIPLAYER",
+    "timestamp": 1788451200000,
+    "date_str": "03 Sep 2026, 23:00 WIB",
     "changes": [
-      "Sistem Multiplayer Co-Op lokal terintegrasi untuk mabar bertarung bersama.",
-      "Senjata baru 'Orbit Blade' dengan rotasi pedang energi berkecepatan tinggi.",
-      "Sistem Sound Manager dan audio alert dinamis."
-    ]
-  },
-  {
-    "id": 3,
-    "version": "v1.4.0",
-    "title": "🌌 Quantum Dimensional Realms & Terminals",
-    "category": "FEATURE",
-    "badge_color": "#a855f7",
-    "timestamp": 1788400000000,
-    "date_str": "02 Sep 2026, 18:30 WIB",
-    "changes": [
-      "Portal lompatan dimensi kuantum (Pyromancer Magma & Void Phantoms).",
-      "Terminal hackable di medan perang (Ally Turret, Shield Pylon, EMP Overcharger).",
-      "Sistem save game permanen dan database perk roguelite."
+      "Mode Mabar Co-Op 2-4 Pemain via WiFi/Hotspot LAN",
+      "Sistem Downed & Revive rekan tim",
+      "Sinkronisasi posisi, proyektil, dan HP pemain tim"
     ]
   }
 ]
