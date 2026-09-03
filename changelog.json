@@ -1,5 +1,16 @@
 [
   {
+    "id": 1788456882,
+    "version": "v1.5.3",
+    "title": "Fitur Menu Pause Lengkap (Tombol Pause di HUD, Menu Utama, Quit Game) & Panduan Detail Host/Join Multiplayer",
+    "category": "FEATURE & UX",
+    "timestamp": 1788456882757,
+    "date_str": "04 Sep 2026, 00:34 WIB",
+    "changes": [
+      "Fitur Menu Pause Lengkap (Tombol Pause di HUD, Menu Utama, Quit Game) & Panduan Detail Host/Join Multiplayer"
+    ]
+  },
+  {
     "id": 1788455556,
     "version": "v1.5.2",
     "title": "Auto sync commit 04-09-2026 00:12",
