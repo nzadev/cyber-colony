@@ -18,6 +18,20 @@ fi
 echo "=================================================="
 echo "⚡ [1-CLICK DEPLOY] Protocol Zero Instant Push"
 echo "=================================================="
+
+# Optional arguments for changelog
+UPDATE_MSG="$1"
+UPDATE_VER="${2:-v1.7.5}"
+UPDATE_CAT="${3:-UPDATE}"
+
+cd "$ANDROID_DIR"
+if [ -n "$UPDATE_MSG" ]; then
+    echo "📝 Mencatat update log: $UPDATE_MSG ($UPDATE_VER)..."
+    python3 update_changelog.py "$UPDATE_MSG" "$UPDATE_VER" "$UPDATE_CAT"
+else
+    python3 update_changelog.py ""
+fi
+
 echo "📦 1/3 Mengekspor APK Android terbaru..."
 
 cd "$PROJECT_DIR"
@@ -26,9 +40,13 @@ godot --headless --export-release "Cyber Colony Tycoon" "$ANDROID_DIR/protocol_z
 cd "$ANDROID_DIR"
 cp -f protocol_zero.apk protocol_zero_prototype.apk 2>/dev/null || true
 
-echo "📝 2/3 Menyimpan perubahan & catatan update..."
+echo "📝 2/3 Menyimpan perubahan & catatan update ke Git..."
 git add .
-git commit -m "Auto Update: $(date '+%d-%m-%Y %H:%M:%S')" 2>/dev/null || true
+COMMIT_TITLE="Auto Update: $(date '+%d-%m-%Y %H:%M:%S')"
+if [ -n "$UPDATE_MSG" ]; then
+    COMMIT_TITLE="[$UPDATE_VER] $UPDATE_MSG"
+fi
+git commit -m "$COMMIT_TITLE" 2>/dev/null || true
 
 echo "⬆️ 3/3 Mengunggah langsung ke GitHub..."
 git push origin main

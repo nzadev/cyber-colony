@@ -1,5 +1,19 @@
 [
   {
+    "id": 1788493234,
+    "version": "v1.7.5",
+    "title": "⚡ ULTRA PERFORMANCE & ANTI-LAG ENGINE (60 FPS SMOOTH)",
+    "category": "PERFORMANCE",
+    "timestamp": 1788493234313,
+    "date_str": "04 Sep 2026, 10:40 WIB",
+    "changes": [
+      "🔊 Procedural SFX Pre-Caching: Buffer audio suara (laser, hit, explosion, zap) di-load saat game start (0% CPU cost saat spam senjata)",
+      "⏱️ Audio Throttling: Mencegah audio clipping dan stutter saat puluhan musuh terkena AOE / hit simultan",
+      "🎯 Zero-Allocation Enemy Targeting: Algoritma bidik musuh dioptimalkan tanpa garbage collection spike",
+      "🚀 Projectile Canvas Optimization: Menghilangkan redraw konstan pada peluru statis & preload scene shard"
+    ]
+  },
+  {
     "id": 1788459800,
     "version": "v1.7.0",
     "title": "🔥 ULTRA UPDATE v1.7.0: 15 FITUR INOVASI TOTAL",
